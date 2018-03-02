@@ -1,0 +1,20 @@
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\bin\Debug\Galaga_Exercise_1.exe
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\bin\Debug\Galaga_Exercise_1.pdb
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\bin\Debug\DIKUArcade.dll
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\bin\Debug\OpenTK.dll
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\bin\Debug\DIKUArcade.pdb
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\bin\Debug\OpenTK.xml
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga-Exercise-1.csprojResolveAssemblyReference.cache
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga-Exercise-1.csproj.CoreCompileInputs.cache
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga_Exercise_1.exe
+C:\Users\Simon\Desktop\Software Udvikling\exercise-4\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga_Exercise_1.pdb
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\bin\Debug\Galaga_Exercise_1.exe
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\bin\Debug\Galaga_Exercise_1.pdb
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\bin\Debug\DIKUArcade.dll
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\bin\Debug\OpenTK.dll
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\bin\Debug\DIKUArcade.pdb
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\bin\Debug\OpenTK.xml
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga-Exercise-1.csprojResolveAssemblyReference.cache
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga-Exercise-1.csproj.CoreCompileInputs.cache
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga_Exercise_1.exe
+C:\Git\su18-hold8\SU18-Exercises\Galaga-Exercise-1\obj\Debug\Galaga_Exercise_1.pdb
