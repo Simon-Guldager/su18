@@ -36,7 +36,7 @@ namespace Galaga_Exercise_1 {
         }
 
         public void MoveLeft() {
-            ((DynamicShape) Entity.Shape).Direction.X += speed;
+            ((DynamicShape) Entity.Shape).Direction.X -= speed;
             Move();
         }
 
