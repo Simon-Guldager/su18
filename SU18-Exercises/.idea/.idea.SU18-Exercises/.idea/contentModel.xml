@@ -87,6 +87,12 @@
           <e p="Enemy.cs" t="Include" />
         </e>
         <e p="Game.cs" t="Include" />
+        <e p="MovementStrategy" t="Include">
+          <e p="Down.cs" t="Include" />
+          <e p="IMovementStrategy.cs" t="Include" />
+          <e p="NoMove.cs" t="Include" />
+          <e p="ZigZagDown.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive" />
         <e p="Player.cs" t="Include" />
         <e p="Program.cs" t="Include" />
@@ -96,6 +102,9 @@
         <e p="Squadrons" t="Include">
           <e p="ISquadron.cs" t="Include" />
           <e p="Squadron1.cs" t="Include" />
+          <e p="Squadron2.cs" t="Include" />
+          <e p="Squadron3.cs" t="Include" />
+          <e p="Squadron4.cs" t="Include" />
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />

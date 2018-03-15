@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using DIKUArcade.Graphics;
+﻿using DIKUArcade.Graphics;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
 

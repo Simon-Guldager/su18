@@ -9,6 +9,7 @@ using DIKUArcade.EventBus;
 using DIKUArcade.Physics;
 using DIKUArcade.Timers;
 using Galaga_Exercise_2.GalagaEntities;
+using Galaga_Exercise_2.MovementStrategy;
 using Galaga_Exercise_2.Squadrons;
 
 namespace Galaga_Exercise_2 {
@@ -21,6 +22,7 @@ namespace Galaga_Exercise_2 {
         
         private List<Image> enemyStrides;
         private EntityContainer<Enemy> enemies;
+        private IMovementStrategy movementStrategy;
         
         private Image shotStride;
         private EntityContainer playerShots;
@@ -38,10 +40,11 @@ namespace Galaga_Exercise_2 {
             enemies = new EntityContainer<Enemy>();
             enemyStrides = ImageStride.CreateStrides(4,
                 Path.Combine("Assets", "Images", "BlueMonster.png"));
-            //AddEnemies();
-            var sqr = new Squadron1(9);
+            
+            var sqr = new Squadron2();
             sqr.CreateEnemies(enemyStrides);
-            //enemies = sqr.Enemies;
+            enemies = sqr.Enemies;
+            movementStrategy = new ZigZagDown();
             
             playerShots = new EntityContainer();
             shotStride = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
@@ -71,6 +74,7 @@ namespace Galaga_Exercise_2 {
                     eventBus.ProcessEvents();
                     ItterateShots();
                     player.Move();
+                    movementStrategy.MoveEnemies(enemies);
                 }
                 
                 if (gameTimer.ShouldRender()) {
@@ -97,13 +101,6 @@ namespace Galaga_Exercise_2 {
                 new ImageStride(explosionLength / 8, explosionStrides));
         }
         
-        //public void AddEnemies() {
-        //       for (int i = 1; i < 9; i++) {
-        //        var shape = new DynamicShape(new Vec2F(i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f));
-        //        enemies.AddDynamicEntity(shape, new ImageStride(80, enemyStrides));
-        //    }
-        //}
-
         public void ItterateShots() {
             playerShots.Iterate(delegate(Entity shot) {
                 if (shot.Shape.Position.Y > 1.0) {
@@ -111,8 +108,8 @@ namespace Galaga_Exercise_2 {
                 }
                 
                 enemies.Iterate(delegate(Enemy enemy) {
-                    var collide = CollisionDetection.Aabb((
-                        DynamicShape) shot.Shape, (DynamicShape) enemy.Shape);
+                    var collide = CollisionDetection.Aabb(
+                        (DynamicShape) shot.Shape, enemy.Shape);
                     if (collide.Collision) {
                         shot.DeleteEntity();
                         enemy.DeleteEntity();
