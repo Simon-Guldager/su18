@@ -9,8 +9,6 @@ namespace Galaga_Exercise_3.GalagaStates {
     public class GameLost : IGameState {
         private static GameLost instance;
 
-        private Entity backGroundImage;
-
         private Text title;
         private Text[] menuButtons;
         private int activeMenuButton;
@@ -32,10 +30,6 @@ namespace Galaga_Exercise_3.GalagaStates {
         public void GameLoop() { }
         
         public void InitializeGameState() {
-            backGroundImage = new Entity(
-                new StationaryShape(new Vec2F(0.0f, 0.0f), new Vec2F(1.0f, 1.0f)),
-                new Image(Path.Combine("Assets", "Images", "TitleImage.png")));
-
             maxMenuButtons = 2;
             activeMenuButton = 0;
             

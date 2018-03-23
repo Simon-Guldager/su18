@@ -48,7 +48,7 @@ namespace Galaga_Exercise_3.GalagaStates {
                         "GAME_WON", ""));
             }
             enemies.Iterate(delegate(Enemy enemy) {
-                if (enemy.Position.Y > 1f) {
+                if (enemy.Shape.Position.Y < 0f) {
                     GalagaBus.GetBus().RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
                             GameEventType.GameStateEvent,
@@ -57,15 +57,6 @@ namespace Galaga_Exercise_3.GalagaStates {
                             "GAME_LOST", ""));
                 }
             });
-        }
-
-        private void gameOver() {
-            GalagaBus.GetBus().RegisterEvent(
-                GameEventFactory<object>.CreateGameEventForAllProcessors(
-                    GameEventType.GameStateEvent,
-                    this,
-                    "CHANGE_STATE",
-                    "MAIN_MENU", ""));
         }
         
         public void ItterateShots() {
@@ -95,7 +86,7 @@ namespace Galaga_Exercise_3.GalagaStates {
             movementStrategy.MoveEnemies(enemies);
         }
 
-        public void RenderState() {
+        public void RenderState() {    
             backGroundImage.RenderEntity();
             playerShots.RenderEntities();
             enemies.RenderEntities();

@@ -9,7 +9,7 @@ using DIKUArcade.EventBus;
 namespace Galaga_Exercise_3 {
     public class Player : IGameEventProcessor<object> {
         private GameEventBus<object> eventBus;
-        private float speed = 0.006f;
+        private float speed = 0.009f;
         
         public Entity Entity;
         
@@ -29,8 +29,7 @@ namespace Galaga_Exercise_3 {
             var ent = ((DynamicShape) Entity.Shape);
             var nextPos = Entity.Shape.Position.X + ent.Direction.X;
             if (nextPos > 0.0 && nextPos < 0.9) {
-                ent.Move(); 
-                
+                ent.Move();             
             }
         }
 
@@ -46,7 +45,6 @@ namespace Galaga_Exercise_3 {
         
         public void ProcessEvent(GameEventType eventType, GameEvent<object> gameEvent) {
             if (eventType == GameEventType.PlayerEvent) {
-                Console.Write(gameEvent.Message);
             }
         }
     }
