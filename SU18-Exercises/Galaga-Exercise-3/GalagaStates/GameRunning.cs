@@ -37,6 +37,36 @@ namespace Galaga_Exercise_3.GalagaStates {
                 new StationaryShape(posX, posY, extentX, extentY), explosionLength,
                 new ImageStride(explosionLength / 8, explosionStrides));
         }
+
+        public void ItterateEnemies() {
+            if (enemies.CountEntities() == 0) {
+                GalagaBus.GetBus().RegisterEvent(
+                    GameEventFactory<object>.CreateGameEventForAllProcessors(
+                        GameEventType.GameStateEvent,
+                        this,
+                        "CHANGE_STATE",
+                        "GAME_WON", ""));
+            }
+            enemies.Iterate(delegate(Enemy enemy) {
+                if (enemy.Position.Y > 1f) {
+                    GalagaBus.GetBus().RegisterEvent(
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.GameStateEvent,
+                            this,
+                            "CHANGE_STATE",
+                            "GAME_LOST", ""));
+                }
+            });
+        }
+
+        private void gameOver() {
+            GalagaBus.GetBus().RegisterEvent(
+                GameEventFactory<object>.CreateGameEventForAllProcessors(
+                    GameEventType.GameStateEvent,
+                    this,
+                    "CHANGE_STATE",
+                    "MAIN_MENU", ""));
+        }
         
         public void ItterateShots() {
             playerShots.Iterate(delegate(Entity shot) {
@@ -60,6 +90,7 @@ namespace Galaga_Exercise_3.GalagaStates {
 
         public void UpdateGameLogic() {
             ItterateShots();
+            ItterateEnemies();
             player.Move();
             movementStrategy.MoveEnemies(enemies);
         }

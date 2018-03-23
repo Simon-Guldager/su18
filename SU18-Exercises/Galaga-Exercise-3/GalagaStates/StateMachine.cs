@@ -23,6 +23,12 @@ namespace Galaga_Exercise_3.GalagaStates {
                 case GameStateType.MainMenu:
                     ActiveState = MainMenu.GetInstance();
                     break;
+                case GameStateType.GameLost:
+                    ActiveState = GameLost.GetInstance();
+                    break;
+                case GameStateType.GameWon:
+                    ActiveState = GameWon.GetInstance();
+                    break;
             }
         }
         
