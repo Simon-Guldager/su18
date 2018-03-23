@@ -1,0 +1,24 @@
+﻿using System.Collections.Generic;
+using DIKUArcade.Entities;
+using DIKUArcade.Graphics;
+using DIKUArcade.Math;
+using Galaga_Exercise_3.GalagaEntities;
+
+namespace Galaga_Exercise_3.Squadrons {
+    public class Squadron1 : ISquadron {
+        public EntityContainer<Enemy> Enemies { get; }
+        public int MaxEnemies { get; }
+        
+        public Squadron1() {
+            MaxEnemies = 8;
+            Enemies = new EntityContainer<Enemy>();
+        }
+        
+        public void CreateEnemies(List<Image> enemyStrides) {
+            for (int i = 1; i < 9; i++) {
+                var shape = new StationaryShape(new Vec2F(i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f));
+                Enemies.AddDynamicEntity(new Enemy(shape, new ImageStride(80, enemyStrides)));
+            }
+        }
+    }
+}
