@@ -31,12 +31,10 @@ namespace Galaga_Exercise_1 {
             win = new Window("Galaca", 500, AspectRatio.R1X1);
             backGround = new Image(Path.Combine("Assets", "Images", "SpaceBackground.png"));
             player = new Player();
-    
             enemies = new EntityContainer();
             enemyStrides = ImageStride.CreateStrides(4,
                 Path.Combine("Assets", "Images", "BlueMonster.png"));
             AddEnemies();
-            
             playerShots = new EntityContainer();
             shotStride = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
             
@@ -61,12 +59,7 @@ namespace Galaga_Exercise_1 {
                 win.PollEvents();
                 gameTimer.MeasureTime();
 
-                while (gameTimer.ShouldUpdate()) {
-                    eventBus.ProcessEvents();
-                    ItterateShots();
-                    player.Move();
-                }
-                
+
                 if (gameTimer.ShouldRender()) {
                     win.Clear();
                     backGround.Render(new StationaryShape(
@@ -96,8 +89,14 @@ namespace Galaga_Exercise_1 {
                 var shape = new DynamicShape(new Vec2F(i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f));
                 enemies.AddDynamicEntity(shape, new ImageStride(80, enemyStrides));
             }
-        }
-
+        } 
+        
+        /// <summary>
+        /// Itterates all playerShots,
+        /// shot is deleted when it's outside the window,
+        /// for each shot itterates all enemies, if shot collidies with enemy, both is deleted,
+        /// all shots that are not removed, are then moved according to the given direction.
+        /// </summary>
         public void ItterateShots() {
             playerShots.Iterate(delegate(Entity shot) {
                 if (shot.Shape.Position.Y > 1.0) {
@@ -122,8 +121,8 @@ namespace Galaga_Exercise_1 {
             switch(key) {
             case "KEY_ESCAPE":
                 eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.WindowEvent, this, "CLOSE_WINDOW", "", ""));
+                    GameEventFactory<object>.CreateGameEventForAllProcessors(
+                        GameEventType.WindowEvent, this, "CLOSE_WINDOW", "", ""));
                 break;
             case "KEY_SPACE":
                 playerShots.AddDynamicEntity(

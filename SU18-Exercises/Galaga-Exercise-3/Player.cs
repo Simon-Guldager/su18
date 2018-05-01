@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
@@ -7,6 +6,7 @@ using DIKUArcade.Math;
 using DIKUArcade.EventBus;
 
 namespace Galaga_Exercise_3 {
+    
     public class Player : IGameEventProcessor<object> {
         private GameEventBus<object> eventBus;
         private float speed = 0.009f;
@@ -24,7 +24,11 @@ namespace Galaga_Exercise_3 {
             }); 
             eventBus.Subscribe(GameEventType.PlayerEvent, this);   
         }    
-  
+          
+        /// <summary>
+        /// Moves the player entity in the current direction,
+        /// if the player entity is inside the window.
+        /// </summary>
         public void Move() {
             var ent = ((DynamicShape) Entity.Shape);
             var nextPos = Entity.Shape.Position.X + ent.Direction.X;

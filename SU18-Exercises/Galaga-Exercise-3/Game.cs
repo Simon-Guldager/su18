@@ -3,7 +3,6 @@ using DIKUArcade;
 using DIKUArcade.EventBus;
 using DIKUArcade.Timers;
 using Galaga_Exercise_3.GalagaStates;
-using DIKUArcade.Math;
 
 namespace Galaga_Exercise_3 {
     public class Game : IGameEventProcessor<object>{
@@ -16,6 +15,8 @@ namespace Galaga_Exercise_3 {
         public Game() {
             gameTimer = new GameTimer();
             win = new Window("Galaca", 500, AspectRatio.R1X1);
+            
+            // eventBus for various GameEvents
             eventBus = GalagaBus.GetBus();
             eventBus.InitializeEventBus(new List<GameEventType>() {
                 GameEventType.GameStateEvent,
@@ -24,6 +25,7 @@ namespace Galaga_Exercise_3 {
                 GameEventType.PlayerEvent 
             }); 
             
+            // The eventBus is linked to the window
             win.RegisterEventBus(eventBus);
             eventBus.Subscribe(GameEventType.WindowEvent, this);   
             

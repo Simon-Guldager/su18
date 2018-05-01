@@ -24,8 +24,11 @@ namespace Galaga_Exercise_1 {
             }); 
             eventBus.Subscribe(GameEventType.PlayerEvent, this);   
         }    
-
-        
+    
+        /// <summary>
+        /// Moves the player entity in the current direction,
+        /// if the player entity is inside the window.
+        /// </summary>
         public void Move() {
             var ent = ((DynamicShape) Entity.Shape);
             var nextPos = Entity.Shape.Position.X + ent.Direction.X;
@@ -34,12 +37,12 @@ namespace Galaga_Exercise_1 {
                 
             }
         }
-
+        
         public void MoveLeft() {
             ((DynamicShape) Entity.Shape).Direction.X -= speed;
             Move();
         }
-
+        
         public void MoveRight() {
             ((DynamicShape) Entity.Shape).Direction.X += speed;
             Move();
