@@ -12,7 +12,7 @@ namespace SpaceTaxi_1.TaxiEntities {
 
         public abstract PropType GetPropType();
         
-        public void RenderProp() {
+        public virtual void RenderProp() {
             PropSprites.RenderEntities();    
         }
         
@@ -28,7 +28,6 @@ namespace SpaceTaxi_1.TaxiEntities {
                     pos.Y = y1;
                 }
             });
-            pos.Y += 1 / 23f;
             return pos;
         }
     }

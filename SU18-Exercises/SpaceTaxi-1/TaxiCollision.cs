@@ -10,7 +10,7 @@ namespace SpaceTaxi_1 {
             
             var ex1 = entity.Shape.Position.X;
             var ey1 = entity.Shape.Position.Y;
-            var ex2 = entity.Shape.Position.X + entity.Shape.Extent.X / 2f;
+            var ex2 = entity.Shape.Position.X + entity.Shape.Extent.X / 2;
             var ey2 = entity.Shape.Position.Y + entity.Shape.Extent.Y;
             return ((px1 <= ex1 && px2 >= ex2 && py1 <= ey2 && py2 >= ey2)
                     || (px1 <= ex1 && px2 >= ex2 && py2 >= ey1 && py1 <= ey2)

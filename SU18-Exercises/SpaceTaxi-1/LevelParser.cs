@@ -10,9 +10,9 @@ using SpaceTaxi_1.TaxiEntities;
 namespace SpaceTaxi_1 {
     public class LevelParser {
         public Player Player;
-        public EntityContainer LevelSprites;
-        public List<Prop> Props;
         public Customer Customer;
+        public List<Prop> Props;
+        public EntityContainer LevelSprites;
 
         private int currentLevelNumber;
         private int numberOfLevels;
@@ -23,6 +23,36 @@ namespace SpaceTaxi_1 {
             currentLevelNumber = 0;
             
             NextLevel();
+        }
+        
+        public bool NextCustomer() {
+            if (customers.Count > 0) {
+                Customer = customers[0];
+                var pos = Customer.Platform.GetPosition();
+                pos.Y += 1 / 23f;
+                Customer.Entity.Shape.Position = pos;
+                customers = customers.Skip(1).ToList();
+            } else if (currentLevelNumber < numberOfLevels) {
+                NextLevel();
+            } else {
+                return false;
+            }
+            return true;
+        }
+        
+        private void NextLevel() {
+            if (currentLevelNumber <= numberOfLevels) {
+                Player.InFlight = false;
+                Player.Entity.Shape.AsDynamicShape().Direction = new Vec2F();
+                
+                customers = new List<Customer>();
+                Props = new List<Prop>();
+                LevelSprites = new EntityContainer();
+                
+                GetLevel(currentLevelNumber);  
+                NextCustomer();
+                currentLevelNumber++;
+            }   
         }
         
         private string GetTextMap(int levelNumber) {
@@ -129,35 +159,7 @@ namespace SpaceTaxi_1 {
                             keyLegend[_char]);
                     }
                 } 
-            }        
-        }
-
-        public void NextLevel() {
-            if (currentLevelNumber <= numberOfLevels) {
-                Player.InFlight = false;
-                Player.Entity.Shape.AsDynamicShape().Direction = new Vec2F();
-                
-                customers = new List<Customer>();
-                Props = new List<Prop>();
-                LevelSprites = new EntityContainer();
-                
-                GetLevel(currentLevelNumber);  
-                NextCustomer();
-                currentLevelNumber++;
-            }   
-        }
-        
-        public bool NextCustomer() {
-            if (customers.Count > 0) {
-                Customer = customers[0];
-                Customer.Entity.Shape.Position = Customer.Platform.GetPosition();
-                customers = customers.Skip(1).ToList();
-                return true;
-            } else if (currentLevelNumber < numberOfLevels) {
-                NextLevel();
-                return true;
             }
-            return false;
         }
     }
 }

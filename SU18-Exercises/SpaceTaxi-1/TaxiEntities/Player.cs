@@ -24,8 +24,10 @@ namespace SpaceTaxi_1.TaxiEntities
 
         public Player() {   
             shape = new DynamicShape(new Vec2F(), new Vec2F(0.0625f, 0.045f));
-            taxiBoosterOffImageLeft = new Image(Path.Combine("Assets", "Images", "Taxi_Thrust_None.png"));
-            taxiBoosterOffImageRight = new Image(Path.Combine("Assets", "Images", "Taxi_Thrust_None_Right.png"));
+            taxiBoosterOffImageLeft = new Image(
+                Path.Combine("Assets", "Images", "Taxi_Thrust_None.png"));
+            taxiBoosterOffImageRight = new Image(
+                Path.Combine("Assets", "Images", "Taxi_Thrust_None_Right.png"));
 
             Entity = new Entity(shape, taxiBoosterOffImageLeft);
             taxiOrientation = Orientation.Right;
@@ -36,7 +38,7 @@ namespace SpaceTaxi_1.TaxiEntities
         public void Move() {
             if (InFlight) {
                 shape.Direction.Y -= accelerationDown + gravity;
-                shape.Direction.X -= accelerationLeftRight; 
+                shape.Direction.X += accelerationLeftRight; 
                 shape.Move();
             }
         }
@@ -69,14 +71,14 @@ namespace SpaceTaxi_1.TaxiEntities
                         break;
                     case "BOOSTER_TO_LEFT":
                         taxiOrientation = Orientation.Left;
-                        accelerationLeftRight = 0.00006f;
+                        accelerationLeftRight = -0.00006f;
                         break;
                     case "STOP_ACCELERATE_LEFT":
                         accelerationLeftRight = 0f;
                         break;
                     case "BOOSTER_TO_RIGHT":
                         taxiOrientation = Orientation.Right;
-                        accelerationLeftRight = -0.00006f;
+                        accelerationLeftRight = 0.00006f;
                         break;
                     case "STOP_ACCELERATE_RIGHT":
                         accelerationLeftRight = 0f;

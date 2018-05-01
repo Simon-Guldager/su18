@@ -15,11 +15,9 @@ namespace SpaceTaxi_1
         private Window win;
         private GameEventBus<object> eventBus;
         private GameTimer gameTimer;
-
-        private readonly Entity backGroundImage;
-
-        private Entity customer;
         private LevelParser level;
+        
+        private readonly Entity backGroundImage;
 
         public Game() {
             // window
@@ -69,9 +67,9 @@ namespace SpaceTaxi_1
 
                 if (gameTimer.ShouldRender()) {
                     win.Clear();
+                    
                     backGroundImage.RenderEntity();
                     level.Player.RenderPlayer();
-                    
                     level.Customer.RenderCustomer();
                     level.LevelSprites.RenderEntities();
                     RenderProps();
@@ -162,7 +160,7 @@ namespace SpaceTaxi_1
             var shape = level.Customer.Entity.Shape;
             if (TaxiCollision.Collision(level.Player.Entity, level.Customer.Entity)) {
                 if (level.Player.Entity.Shape.AsDynamicShape().Direction.Y != 0f) {
-                    NextCustomer();   
+                    win.CloseWindow();   
                 } else {
                     level.Customer.InFlight = true;
                 }    
@@ -200,6 +198,9 @@ namespace SpaceTaxi_1
                                 shape.Position.Y =
                                     entity.Shape.Position.Y + entity.Shape.Extent.Y + 0.001f;
                                 level.Player.Platform = (Platform)p;
+                                if (level.Customer.Destination == (Platform)p) {
+                                    NextCustomer();    
+                                }
                                 break;
                             case PropType.Exit:
                                 if (level.Customer.Destination == null) {

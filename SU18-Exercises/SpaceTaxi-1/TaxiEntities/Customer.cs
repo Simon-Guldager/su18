@@ -17,7 +17,8 @@ namespace SpaceTaxi_1.TaxiEntities {
         public Customer(Platform dest) {
             InFlight = false;
             shape = new DynamicShape(new Vec2F(), new Vec2F(0.03f, 0.06f));
-            customerStandRight = new Image(Path.Combine("Assets", "Images", "CustomerStandRight.png"));
+            customerStandRight = new Image(
+                Path.Combine("Assets", "Images", "CustomerStandRight.png"));
             Entity = new Entity(shape, customerStandRight);
             
             Platform = dest;
