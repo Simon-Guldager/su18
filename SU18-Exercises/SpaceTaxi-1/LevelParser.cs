@@ -27,9 +27,12 @@ namespace SpaceTaxi_1 {
         
         public bool NextCustomer() {
             if (customers.Count > 0) {
+                // pop the list of customers
                 Customer = customers[0];
                 var pos = Customer.Platform.GetPosition();
                 pos.Y += 1 / 23f;
+                
+                // set position of new customer
                 Customer.Entity.Shape.Position = pos;
                 customers = customers.Skip(1).ToList();
             } else if (currentLevelNumber < numberOfLevels) {
@@ -45,6 +48,7 @@ namespace SpaceTaxi_1 {
                 Player.InFlight = false;
                 Player.Entity.Shape.AsDynamicShape().Direction = new Vec2F();
                 
+                // reset props on each level
                 customers = new List<Customer>();
                 Props = new List<Prop>();
                 LevelSprites = new EntityContainer();
@@ -70,7 +74,7 @@ namespace SpaceTaxi_1 {
             numberOfLevels = files.Length;
             return Path.Combine(path, files[levelNumber].Name);
         }
-
+        
         private void GetLevel(int n) {
             var file = GetTextMap(n);
             var text = File.ReadAllLines(file);
@@ -81,17 +85,21 @@ namespace SpaceTaxi_1 {
             SetKeys(text.Skip(24), platformKeys, keyLegend);
             AsciiToLevel(text.Take(23), platformKeys, keyLegend);
         }
-
+        
+        /// <summary>
+        /// Translates the metadata in the given text, to a set of keys.
+        /// </summary>
         private void SetKeys(IEnumerable<string> text,
             Dictionary<char, Platform> platformKeys, Dictionary<char, Image> keyLegend) {
-            // read from metadata
+            // read from metadata text
             foreach (var line in text) {
                 if (line != "") {
                     var s = line.Split(' ');
+                    
+                    // the first word in the sentence determines the type
                     switch (s[0]) {
-                        case "Name:":
-                            break;
-                        case "Platforms:":
+                        case "Platforms:": 
+                            // add platform to dict with key
                             foreach (var ss in s.Skip(1)) {
                                 var plat = new Platform();
                                 Props.Add(plat);
@@ -99,6 +107,7 @@ namespace SpaceTaxi_1 {
                             }
                             break;
                         case "Customer:":
+                            // add customer with origin and destionation to dict with key
                             var origin = platformKeys[s[3][0]];
                             var dest = s[4][0];
                             var customer = new Customer(origin);
@@ -118,6 +127,9 @@ namespace SpaceTaxi_1 {
             }   
         }
         
+        /// <summary>
+        /// Translates the ASCII map with a set of keys.
+        /// </summary>
         private void AsciiToLevel(IEnumerable<string> text,
             Dictionary<char, Platform> platformKeys, Dictionary<char, Image> keyLegend) {
             // map is 23 x 40, calculate size of each levelSprite

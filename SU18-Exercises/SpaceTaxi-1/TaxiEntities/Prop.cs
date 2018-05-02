@@ -16,11 +16,17 @@ namespace SpaceTaxi_1.TaxiEntities {
             PropSprites.RenderEntities();    
         }
         
+        /// <summary>
+        /// Itterates all entities in a given prop, and finds the leftmost entity, usefull
+        /// when placing customers.
+        /// </summary>
         public Vec2F GetPosition() {
             var pos = new Vec2F(1f, 1f);
+            
             PropSprites.Iterate(delegate(Entity entity) {
                 var x1 = entity.Shape.Position.X;
                 var y1 = entity.Shape.Position.Y;
+                
                 if (x1 < pos.X) {
                     pos.X = x1;
                 }

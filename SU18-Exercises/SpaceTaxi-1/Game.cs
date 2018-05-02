@@ -60,11 +60,10 @@ namespace SpaceTaxi_1
                     eventBus.ProcessEvents();
                     
                     level.Player.Move();
-                    MoveCustomer();
+                    UpdateCustomer();
                     ItterateProps();
                     ItterateLevelSprites();
                 }
-
                 if (gameTimer.ShouldRender()) {
                     win.Clear();
                     
@@ -73,10 +72,9 @@ namespace SpaceTaxi_1
                     level.Customer.RenderCustomer();
                     level.LevelSprites.RenderEntities();
                     RenderProps();
-
+        
                     win.SwapBuffers();
                 }
-
                 if (gameTimer.ShouldReset()) {
                     // 1 second has passed - display last captured ups and fps from the timer
                     win.Title = "Space Taxi | UPS: " + gameTimer.CapturedUpdates + ", FPS: " +
@@ -152,36 +150,55 @@ namespace SpaceTaxi_1
                 }
             }
         }
-
-        private void MoveCustomer() {
+        
+        /// <summary>
+        /// Spawn the next customer, if there is none, the game is over
+        /// </summary>
+        private void NextCustomer() {
+            if (!level.NextCustomer()) {
+                win.CloseWindow();   
+            }    
+        }
+        
+        /// <summary>
+        /// Moves the customer towards the taxi if they are on the same platform.
+        /// Then checks for a collision between the taxi and the player.
+        /// Note that the customer is never moved when inside the taxi, instead
+        /// the customer is simply made invisible.
+        /// </summary>
+        private void UpdateCustomer() {
+            // if the customer is inside the taxi, none of this applies
             if (level.Customer.InFlight) {
                 return;    
             }
-            var shape = level.Customer.Entity.Shape;
-            if (TaxiCollision.Collision(level.Player.Entity, level.Customer.Entity)) {
-                if (level.Player.Entity.Shape.AsDynamicShape().Direction.Y != 0f) {
+            // shorthand for public fields.
+            var shapeC = level.Customer.Entity.Shape;
+            var shapeP = level.Player.Entity;
+            
+            // if the taxi collides with the customer, make sure the taxi is static
+            if (TaxiCollision.Collision(shapeP, level.Customer.Entity)) {
+                if (shapeP.Shape.AsDynamicShape().Direction.Y != 0f) {
                     win.CloseWindow();   
                 } else {
                     level.Customer.InFlight = true;
                 }    
-            }
+            } 
+            // if the taxi is on the platform of a customer, move the customer towards the taxi
             if (level.Player.Platform == level.Customer.Platform) {
-                var pos = level.Player.Entity.Shape.Position.X;
-                if (pos > shape.Position.X) {
-                    shape.Position.X += 0.002f;
+                var pos = shapeP.Shape.Position.X;
+                if (pos > shapeC.Position.X) {
+                    shapeC.Position.X += 0.002f;
                 } else {
-                    shape.Position.X -= 0.002f;
+                    shapeC.Position.X -= 0.002f;
                 }     
             }       
         }
         
-        private void RenderProps() {
-            foreach (Prop p in level.Props) {
-                p.RenderProp();
-            }
-        }
-
-        private void ItterateProps() {           
+        /// <summary>
+        /// Itterates over the different props and calls relevant methods.
+        /// </summary>
+        private void ItterateProps() {  
+            // since the player object keeps a platform, make sure it is null when airborn
             if (level.Player.InFlight) {
                 level.Player.Platform = null;
             }
@@ -189,22 +206,32 @@ namespace SpaceTaxi_1
                 p.PropSprites.Iterate(delegate(Entity entity) {
                     if (TaxiCollision.Collision(level.Player.Entity, entity)) {
                         switch (p.GetPropType()) {
+                            // if the player collides with a platform 
                             case PropType.Platform:
                                 var shape = level.Player.Entity.Shape;
+                                
+                                // the taxi crashes if it lands at too much speed
                                 if (shape.AsDynamicShape().Direction.Y < -0.002f) {  
                                     win.CloseWindow(); 
                                 }  
+                                // othwerwise the taxi is stopped, and moved a tiny bit
+                                // above the platform to prevent further collsions
                                 level.Player.Stall();
                                 shape.Position.Y =
                                     entity.Shape.Position.Y + entity.Shape.Extent.Y + 0.001f;
                                 level.Player.Platform = (Platform)p;
+                                
                                 if (level.Customer.Destination == (Platform)p) {
                                     NextCustomer();    
                                 }
                                 break;
                             case PropType.Exit:
-                                if (level.Customer.Destination == null) {
-                                    NextCustomer();    
+                                // if the current customer is airborn and the exit is reached
+                                // go to the next level
+                                if (level.Customer.InFlight && level.Customer.Destination == null) {
+                                    NextCustomer();   
+                                } else {
+                                    win.CloseWindow();
                                 }
                                 break;
                         }
@@ -212,7 +239,10 @@ namespace SpaceTaxi_1
                 });
             }
         }
-
+        
+        /// <summary>
+        /// Checks if the taxi has collided with the environment, whereby the game is over.
+        /// </summary>
         private void ItterateLevelSprites() {
             level.LevelSprites.Iterate(delegate(Entity entity) {
                 if (TaxiCollision.Collision(level.Player.Entity, entity)) {
@@ -221,11 +251,11 @@ namespace SpaceTaxi_1
                 }
             });
         }
-
-        private void NextCustomer() {
-            if (!level.NextCustomer()) {
-                win.CloseWindow();   
-            }    
+        
+        private void RenderProps() {
+            foreach (Prop p in level.Props) {
+                p.RenderProp();
+            }
         }
     }
 }
