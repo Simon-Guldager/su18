@@ -49,10 +49,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestPlayer.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestPlayer.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SpaceTaxiTests/TestPlayer.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
+            <state relative-caret-position="765">
               <caret line="51" column="1" lean-forward="false" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
               <folding>
                 <marker date="1525247872946" expanded="true" signature="6:157" ph="..." />
@@ -212,7 +212,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaxiCollision.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaxiCollision.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SpaceTaxi-1/TaxiCollision.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -541,12 +541,12 @@
       <workItem from="1525078412971" duration="22346000" />
       <workItem from="1525122522239" duration="426000" />
       <workItem from="1525159371510" duration="7267000" />
-      <workItem from="1525167054850" duration="36210000" />
+      <workItem from="1525167054850" duration="38306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208511000" />
+    <option name="totallyTimeSpent" value="210607000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1222,22 +1222,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SpaceTaxiTests/TestPlayer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="51" column="1" lean-forward="false" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
-          <folding>
-            <marker date="1525247872946" expanded="true" signature="6:157" ph="..." />
-            <marker date="1525247872946" expanded="true" signature="184:1556" ph="{...}" />
-            <marker date="1525247872946" expanded="true" signature="234:1554" ph="{...}" />
-            <marker date="1525247872946" expanded="true" signature="321:510" ph="{...}" />
-            <marker date="1525247872946" expanded="true" signature="573:859" ph="{...}" />
-            <marker date="1525247872946" expanded="true" signature="921:1203" ph="{...}" />
-            <marker date="1525247872946" expanded="true" signature="1263:1548" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SpaceTaxi-1/LevelParser.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
@@ -1337,6 +1321,22 @@
             <marker date="1525246406470" expanded="true" signature="50:989" ph="{...}" />
             <marker date="1525246406470" expanded="true" signature="83:987" ph="{...}" />
             <marker date="1525246406470" expanded="true" signature="151:981" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpaceTaxiTests/TestPlayer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="51" column="1" lean-forward="false" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+          <folding>
+            <marker date="1525247872946" expanded="true" signature="6:157" ph="..." />
+            <marker date="1525247872946" expanded="true" signature="184:1556" ph="{...}" />
+            <marker date="1525247872946" expanded="true" signature="234:1554" ph="{...}" />
+            <marker date="1525247872946" expanded="true" signature="321:510" ph="{...}" />
+            <marker date="1525247872946" expanded="true" signature="573:859" ph="{...}" />
+            <marker date="1525247872946" expanded="true" signature="921:1203" ph="{...}" />
+            <marker date="1525247872946" expanded="true" signature="1263:1548" ph="{...}" />
           </folding>
         </state>
       </provider>
