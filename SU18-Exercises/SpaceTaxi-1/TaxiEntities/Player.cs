@@ -10,9 +10,9 @@ namespace SpaceTaxi_1.TaxiEntities
 {
     public class Player : IGameEventProcessor<object> {
         public Platform Platform;
-        
         public bool InFlight;
         public Entity Entity { get; private set; }
+        
         private readonly DynamicShape shape;
         private readonly Image taxiBoosterOffImageLeft;
         private readonly Image taxiBoosterOffImageRight;
