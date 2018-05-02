@@ -20,7 +20,7 @@ namespace SpaceTaxi_1.TaxiEntities
 
         private float accelerationDown = 0f;
         private float accelerationLeftRight = 0f;
-        private float gravity = 0.0001f;
+        private float gravity = -0.0001f;
 
         public Player() {   
             shape = new DynamicShape(new Vec2F(), new Vec2F(0.0625f, 0.045f));
@@ -37,7 +37,7 @@ namespace SpaceTaxi_1.TaxiEntities
 
         public void Move() {
             if (InFlight) {
-                shape.Direction.Y -= accelerationDown + gravity;
+                shape.Direction.Y += accelerationDown + gravity;
                 shape.Direction.X += accelerationLeftRight; 
                 shape.Move();
             }
@@ -64,7 +64,7 @@ namespace SpaceTaxi_1.TaxiEntities
                 switch (gameEvent.Message)
                 {
                     case "BOOSTER_UPWARDS":
-                        accelerationDown = -0.0003f;
+                        accelerationDown = 0.0003f;
                         break;
                     case "STOP_ACCELERATE_UP":
                         accelerationDown = 0f;

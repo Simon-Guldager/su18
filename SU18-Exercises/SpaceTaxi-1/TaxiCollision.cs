@@ -10,6 +10,8 @@ namespace SpaceTaxi_1 {
             
             var ex1 = entity.Shape.Position.X;
             var ey1 = entity.Shape.Position.Y;
+            
+            // divide by 2 to make some navigaton easier, can be really teadious without
             var ex2 = entity.Shape.Position.X + entity.Shape.Extent.X / 2;
             var ey2 = entity.Shape.Position.Y + entity.Shape.Extent.Y;
             return ((px1 <= ex1 && px2 >= ex2 && py1 <= ey2 && py2 >= ey2)

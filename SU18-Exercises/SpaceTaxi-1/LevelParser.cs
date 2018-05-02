@@ -98,6 +98,9 @@ namespace SpaceTaxi_1 {
                     
                     // the first word in the sentence determines the type
                     switch (s[0]) {
+                        case "Name:":
+                            // eventually the name of each level will be on display
+                            break;
                         case "Platforms:": 
                             // add platform to dict with key
                             foreach (var ss in s.Skip(1)) {
